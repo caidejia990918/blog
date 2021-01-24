@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer class="footer-area" th:fragment="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+          <!-- Copywrite Text -->
+          <div class="copywrite-text">
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script>
+              All rights reserved |  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+              href="" target="_blank">Flash</a>
+            </p>
+          </div>
+          <!-- Footer Logo -->
+          <div class="footer-logo">
+            <a  th:href="@{/}"><img th:src="@{/img/core-img/logo2.png}" alt=""></a>
+          </div>
+          <!-- Social Info -->
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

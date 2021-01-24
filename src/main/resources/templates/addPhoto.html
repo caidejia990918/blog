@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <title>
+    图片添加
+  </title>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
+  <link rel="icon" th:href="@{/img/core-img/favicon.png}">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <style>
+    .center-in-center{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    body{
+      background:url(/img/bg-img/3.jpg)no-repeat;
+      width:100%;
+      height:100%;
+      background-size:100% 100%;
+      position:absolute;
+      filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
+    }
+  </style>
+</head>
+<body>
+<header th:insert="~{common/header::header}">
+</header>
+<div style="text-align: center;margin-top:10%" >
+  <h1 style="color: #7abaff">
+    图片添加
+  </h1>
+</div>
+
+<div class="center-in-center" style="width: 500px;background-color: #7abaff;text-align: center">
+  <form class="ui form" method="POST" enctype="multipart/form-data" th:action="@{/upload}">
+    <div>
+      <div class="field">
+        <label>请上传图片文件</label>
+        <input type="text" name="category" placeholder="照片类别">
+      </div>
+      <input type="file" name="file"/>
+      <button class="ui button" type="submit" >Submit</button>
+    </div>
+  </form>
+
+  <div th:if="${msg!=null}" style="text-align: center">
+    <h3 style="color: red" th:text="${msg}"></h3>
+  </div>
+</div>
+
+
+
+
+</body>
+
+</html>

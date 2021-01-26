@@ -20,9 +20,7 @@
 
 <body>
 <!-- Preloader -->
-<div id="preloader">
-  <div class="loader"></div>
-</div>
+
 <!-- /Preloader -->
 
 <!-- Top Search Form Area -->
@@ -222,6 +220,36 @@
 <script th:src="@{/js/alime.bundle.js}"></script>
 <!-- Active -->
 <script th:src="@{/js/default-assets/active.js}"></script>
+
+<script>
+  function loadImage(obj,url,callback)
+  {
+    var img = new Image();
+    img.src = url;
+
+    // 判断图片是否在缓存中
+    if(img.complete){
+      callback.call(img,obj);
+      return;
+    }
+
+    // 图片加载到浏览器的缓存中回调函数
+    img.onload = function(){
+      callback.call(img,obj);
+    }
+  }
+
+  function showImage(obj){
+    obj.src = this.src;
+  }
+
+  var imgs = document.querySelectorAll('img');
+  for(var i = 0;i<imgs.length;i++)
+  {
+    var url = imgs[i].dataset.src;
+    loadImage(imgs[i],url,showImage);
+  }
+</script>
 
 
 </body>

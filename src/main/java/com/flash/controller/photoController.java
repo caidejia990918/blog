@@ -43,7 +43,7 @@ public class photoController {
     return "manage";
   }
 
-  @RequestMapping("addPhoto")
+  @RequestMapping("/manage/addPhoto")
   public String addPhoto(){
     return "addPhoto";
   }
@@ -113,7 +113,7 @@ public class photoController {
       return "addPhoto";
     }
   }
-  @RequestMapping("/show")
+  @RequestMapping("/manage/show")
   public String showPhotos(Model model){
     List<Photo> Photos = photoService.list(new QueryWrapper<Photo>());
 //    String path = "/Users/cdj990918/Downloads/Photo/";
@@ -121,7 +121,7 @@ public class photoController {
     model.addAttribute("photos", Photos);
     return "showPhotos";
   }
-@RequestMapping("/show/delete/{id}")
+@RequestMapping("/manage/show/delete/{id}")
   public String deleteBook(@PathVariable("id")Long id){
   QueryWrapper<Photo> photo = new QueryWrapper<Photo>().eq("id", id);
   Photo one = photoService.getOne(photo);
@@ -135,7 +135,7 @@ public class photoController {
   {
     System.out.println("删除失败");
   }
-  return  "redirect:/show";
+  return  "redirect:/manage/show";
   }
 
   @RequestMapping("/")
@@ -165,7 +165,7 @@ public class photoController {
     List mylist = new ArrayList<Integer>(); //生成数据集，用来保存随即生成数，并用于判断
     Random rd = new Random();
     while(mylist.size() < size) {
-      int num = rd.nextInt(size);
+      int num = rd.nextInt(length);
       if(!mylist.contains(num)) {
         mylist.add(num); //往集合里面添加数据。
       }

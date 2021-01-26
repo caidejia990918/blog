@@ -8,7 +8,6 @@
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
   <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet">
   <script th:src="@{https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js}"></script>
-  <script th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
   <link rel="icon" th:href="@{/img/core-img/favicon.png}">
 
   <!-- Stylesheet -->
@@ -17,27 +16,59 @@
     div.ff {
       margin-bottom: 20px;
     }
-    body{
-      background:url(/img/bg-img/3.jpg)no-repeat;
-      width:100%;
-      height:100%;
-      background-size:100% 100%;
-      position:absolute;
-      filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
-    }
+
   </style>
 </head>
 <body>
+
+<!--<div id="preloader">-->
+<!--  <div class="loader"></div>-->
+<!--</div>-->
+
+<!-- Top Search Form Area -->
+<div class="top-search-area">
+  <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <!-- Close -->
+          <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+          <!-- Form -->
+          <form action="index.html" method="post">
+            <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header th:insert="~{common/header::header}">
 </header>
-<h1 style="margin-top: 10%">
-  照片管理
-</h1>
-<div class="ui segment">
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/fff.jpg);">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12">
+        <div class="breadcrumb-content text-center">
+          <h2 class="page-title">照片管理</h2>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a th:href="@{/}"><i class="icon_house_alt"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">照片管理</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="ui segment" >
       <div class="ff " th:each="photo:${photos}" style="text-align: center">
-        <img class="ui rounded centered medium image" th:src="@{/photos/}+${photo.getName()}">
-        <button class="negative ui centered button " th:onclick="myFunction([[${photo.getId}]])">删除</button>
-        <div class="ui divider"></div>
+        <img class="ui rounded centered medium image" th:src="@{/photosf/}+${photo.getNamef()}">
+        <button class="negative ui centered button " th:onclick="myFunction([[${photo.getId}]])" style="margin-top: 15px">删除</button>
       </div>
 </div>
 

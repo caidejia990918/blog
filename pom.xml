@@ -51,6 +51,12 @@
       </exclusions>
     </dependency>
 
+    <dependency>
+      <groupId>net.coobird</groupId>
+      <artifactId>thumbnailator</artifactId>
+      <version>0.4.8</version>
+    </dependency>
+
     <!--mp-->
     <dependency>
       <groupId>com.baomidou</groupId>
@@ -92,6 +98,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
     </dependency>
 
   </dependencies>

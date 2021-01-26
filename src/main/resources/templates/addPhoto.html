@@ -7,9 +7,9 @@
   <title>
     图片添加
   </title>
-  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
-  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+  <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
   <link rel="icon" th:href="@{/img/core-img/favicon.png}">
 
   <!-- Stylesheet -->
@@ -48,8 +48,19 @@
   <form class="ui form" method="POST" enctype="multipart/form-data" th:action="@{/upload}">
     <div>
       <div class="field">
-        <label>请上传图片文件</label>
-        <input type="text" name="category" placeholder="照片类别">
+        <label>照片分类</label>
+        <div class="ui selection dropdown">
+          <input type="hidden" name="category">
+          <i class="dropdown icon"></i>
+          <div class="default text">照片分类</div>
+          <div class="menu">
+            <div class="item" data-value="QingDao">青岛</div>
+            <div class="item" data-value="ShuZhou">苏州</div>
+            <div class="item" data-value="NanJing">南京</div>
+            <div class="item" data-value="WuXi">无锡</div>
+            <div class="item" data-value="Life">生活</div>
+          </div>
+        </div>
       </div>
       <input type="file" name="file"/>
       <button class="ui button" type="submit" >Submit</button>
@@ -63,7 +74,18 @@
 
 
 
+<script>
+  $(document).ready(function(){
+    $('.ui.selection.dropdown').dropdown();
+    $("#btn").on("click",()=>{
+      alert($("#gender").val());
+    });
+  });
+</script>
+
 
 </body>
+
+
 
 </html>

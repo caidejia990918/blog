@@ -1,10 +1,13 @@
 package com.flash.controller;
 
 
+import cn.hutool.db.Session;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.flash.entity.Photo;
 import com.flash.service.PhotoService;
+import com.flash.util.ImageUtil;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -14,16 +17,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static java.lang.Math.min;
 
 @Controller
 public class photoController {
 
   @Autowired
   PhotoService photoService;
-  private String path = "/Users/cdj990918/Downloads/Photo/";
+  private String path = "/Users/cdj990918/Downloads/photo/";
+  private String path2 = "/Users/cdj990918/Downloads/flash/";
+
+
 
 
   @RequestMapping("/manage")
@@ -37,7 +49,7 @@ public class photoController {
   }
 
   @RequestMapping("/upload")
-  public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("category") String name ,Model model) throws SQLIntegrityConstraintViolationException {
+  public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("category") String name , Model model) throws SQLIntegrityConstraintViolationException {
     if (!file.isEmpty()) {
       try {
         String originalFilename = file.getOriginalFilename();
@@ -46,18 +58,27 @@ public class photoController {
         if (i > 0) {
           extension = originalFilename.substring(i+1);
         }
-        if(("jpg".equals(extension))||("jpeg".equals(extension))){
+        if(ImageUtil.isImage(extension)){
 
         }
         else{
-          model.addAttribute("msg","上传失败，请传入后缀名为jpg或者jpeg的图片");
+          model.addAttribute("msg","上传失败，请上传图片");
           return "addPhoto";
         }
+
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(path+file.getOriginalFilename())));
-        System.out.println(file.getName());
+        System.out.println("上传成功");
         out.write(file.getBytes());
         out.flush();
         out.close();
+
+        //String pp = "/Users/cdj990918/Downloads/photo/";
+        String [] files = new String[]{
+          path+file.getOriginalFilename()
+        };
+        ImageUtil.generateThumbnail2Directory(path2,files);
+        files = null;
+
       } catch (FileNotFoundException e) {
         e.printStackTrace();
 
@@ -71,19 +92,21 @@ public class photoController {
 
       Photo photo = new Photo();
       photo.setCategory(name);
-      photo.setName(file.getOriginalFilename());
+      String temp =file.getOriginalFilename();
+      photo.setName(temp);
+      StringBuffer ss = new StringBuffer(temp).insert(temp.indexOf("."), "-thumbnail");
+      photo.setNamef(ss.toString());
+
       try {
         photoService.save(photo);
       } catch (DataIntegrityViolationException e) {
         model.addAttribute("msg","上传失败，照片已存在");
       }finally {
         model.addAttribute("msg","上传成功");
+        return "addPhoto";
       }
 
 
-
-
-      return "addPhoto";
 
     } else {
       model.addAttribute("msg", "上传失败，因为文件是空的.");
@@ -104,10 +127,13 @@ public class photoController {
   Photo one = photoService.getOne(photo);
   photoService.remove(photo);
   File file = new File(path + one.getName());
-  String s = one.getName();
-  System.out.println(s);
-  if(file.delete()){
+  File file1 = new File(path2+one.getNamef());
+  if(file.delete()&&file1.delete()){
     System.out.println("删除成功");
+  }
+  else
+  {
+    System.out.println("删除失败");
   }
   return  "redirect:/show";
   }
@@ -116,6 +142,8 @@ public class photoController {
   public String getPhotos(Model model){
     List<Photo> Photos = photoService.list(new QueryWrapper<Photo>());
     model.addAttribute("photos", Photos);
+    List<Integer> random = getRandom(Photos.size());
+    model.addAttribute("random",random);
     return "index";
   }
 
@@ -131,4 +159,18 @@ public class photoController {
     return "gallery";
   }
 
+
+  public  List<Integer> getRandom(int length){
+    int size = min(length,15);
+    List mylist = new ArrayList<Integer>(); //生成数据集，用来保存随即生成数，并用于判断
+    Random rd = new Random();
+    while(mylist.size() < size) {
+      int num = rd.nextInt(size);
+      if(!mylist.contains(num)) {
+        mylist.add(num); //往集合里面添加数据。
+      }
+    }
+
+    return mylist;
+  }
 }

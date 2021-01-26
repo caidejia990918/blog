@@ -98,8 +98,9 @@
             <button class="btn active" data-filter="*">All</button>
             <button class="btn" data-filter=".QingDao">QingDao</button>
             <button class="btn" data-filter=".ShuZhou">ShuZhou</button>
-            <button class="btn" data-filter=".country">Country</button>
-            <button class="btn" data-filter=".video">Video</button>
+            <button class="btn" data-filter=".NanJing">NanJing</button>
+            <button class="btn" data-filter=".WuXi">WuXi</button>
+            <button class="btn" data-filter=".Life">Life</button>
           </div>
         </div>
       </div>
@@ -108,9 +109,9 @@
     <div class="row alime-portfolio" >
       <!-- Single Gallery Item -->
       <div class="col-12 col-sm-6 col-lg-3 single_gallery_item mb-30 wow fadeInUp"
-           th:data-wow-delay="${photoStat.index*100}" th:each="photo:${photos}" th:classappend="${photo.getCategory()}" >
+           th:data-wow-delay="${r*100%500}" th:each="r:${random}" th:with="photo=${photos.get(r)}" th:classappend="${photo.getCategory()}" id="ff">
         <div class="single-portfolio-content" >
-          <img th:src="@{/photos/}+${photo.getName()}" alt="">
+          <img th:src="@{/photosf/}+${photo.getNamef()}" alt="">
           <div class="hover-content">
             <a th:href="@{/photos/}+${photo.getName()}"  class="portfolio-img">+</a>
           </div>
@@ -208,6 +209,8 @@
 </footer>
 <!-- Footer Area End -->
 
+
+
 <!-- **** All JS Files ***** -->
 <!-- jQuery 2.2.4 -->
 <script th:src="@{/js/jquery.min.js}"></script>
@@ -219,6 +222,7 @@
 <script th:src="@{/js/alime.bundle.js}"></script>
 <!-- Active -->
 <script th:src="@{/js/default-assets/active.js}"></script>
+
 
 </body>
 

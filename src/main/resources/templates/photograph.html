@@ -90,7 +90,7 @@
           <div class="col-12 col-sm-6 col-lg-3 single_gallery_item mb-30 wow fadeInUp"
                th:data-wow-delay="${photoStat.index*100}" th:each="photo:${photos}" th:classappend="${photo.getCategory()}" >
             <div class="single-portfolio-content" >
-              <img th:src="@{/photos/}+${photo.getName()}" alt="">
+              <img th:src="@{/photosf/}+${photo.getNamef()}" alt="">
               <div class="hover-content">
                 <a th:href="@{/photos/}+${photo.getName()}"  class="portfolio-img">+</a>
               </div>

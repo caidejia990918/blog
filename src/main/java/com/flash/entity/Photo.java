@@ -15,5 +15,6 @@ public class Photo {
   @TableId(value = "id", type = IdType.AUTO)
   private Long id;
   private String name;
+  private String namef;
   private String category;
 }

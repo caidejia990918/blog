@@ -53,11 +53,12 @@
           <input type="hidden" name="category">
           <i class="dropdown icon"></i>
           <div class="default text">照片分类</div>
-          <div class="menu">
+          <div class="menu" >
             <div class="item" data-value="QingDao">青岛</div>
             <div class="item" data-value="ShuZhou">苏州</div>
             <div class="item" data-value="NanJing">南京</div>
             <div class="item" data-value="WuXi">无锡</div>
+            <div class="item" data-value="Family">家人</div>
             <div class="item" data-value="Life">生活</div>
           </div>
         </div>
@@ -77,9 +78,6 @@
 <script>
   $(document).ready(function(){
     $('.ui.selection.dropdown').dropdown();
-    $("#btn").on("click",()=>{
-      alert($("#gender").val());
-    });
   });
 </script>
 

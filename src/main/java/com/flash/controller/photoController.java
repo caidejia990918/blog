@@ -1,13 +1,10 @@
 package com.flash.controller;
 
 
-import cn.hutool.db.Session;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.flash.entity.Photo;
 import com.flash.service.PhotoService;
 import com.flash.util.ImageUtil;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
@@ -40,12 +36,12 @@ public class photoController {
 
   @RequestMapping("/manage")
   public String PhotoManage(){
-    return "manage";
+    return "/photoManage/manage";
   }
 
   @RequestMapping("/manage/addPhoto")
   public String addPhoto(){
-    return "addPhoto";
+    return "/photoManage/addPhoto";
   }
 
   @RequestMapping("/upload")
@@ -63,7 +59,7 @@ public class photoController {
         }
         else{
           model.addAttribute("msg","上传失败，请上传图片");
-          return "addPhoto";
+          return "/photoManage/addPhoto";
         }
 
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(path+file.getOriginalFilename())));
@@ -83,11 +79,11 @@ public class photoController {
         e.printStackTrace();
 
         model.addAttribute("msg", "上传失败," + e.getMessage());
-        return "addPhoto";
+        return "/photoManage/addPhoto";
       } catch (IOException e) {
         e.printStackTrace();
         model.addAttribute("msg","上传失败," + e.getMessage());
-        return "addPhoto";
+        return "/photoManage/addPhoto";
       }
 
       Photo photo = new Photo();
@@ -103,14 +99,14 @@ public class photoController {
         model.addAttribute("msg","上传失败，照片已存在");
       }finally {
         model.addAttribute("msg","上传成功");
-        return "addPhoto";
+        return "/photoManage/addPhoto";
       }
 
 
 
     } else {
       model.addAttribute("msg", "上传失败，因为文件是空的.");
-      return "addPhoto";
+      return "/photoManage/addPhoto";
     }
   }
   @RequestMapping("/manage/show")
@@ -119,10 +115,10 @@ public class photoController {
 //    String path = "/Users/cdj990918/Downloads/Photo/";
 //    File[] files = new File(path).listFiles();
     model.addAttribute("photos", Photos);
-    return "showPhotos";
+    return "/photoManage/showPhotos";
   }
 @RequestMapping("/manage/show/delete/{id}")
-  public String deleteBook(@PathVariable("id")Long id){
+  public String deletePhoto(@PathVariable("id")Long id){
   QueryWrapper<Photo> photo = new QueryWrapper<Photo>().eq("id", id);
   Photo one = photoService.getOne(photo);
   photoService.remove(photo);
@@ -136,6 +132,15 @@ public class photoController {
     System.out.println("删除失败");
   }
   return  "redirect:/manage/show";
+  }
+
+  @RequestMapping("/manage/show/edit/{id}")
+  public String editPhoto(@PathVariable("id")Long id,@RequestParam("category")String name){
+    QueryWrapper<Photo> photo = new QueryWrapper<Photo>().eq("id", id);
+    Photo one = photoService.getOne(photo);
+    one.setCategory(name);
+    photoService.saveOrUpdate(one);
+    return  "redirect:/manage/show";
   }
 
   @RequestMapping("/")

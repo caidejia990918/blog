@@ -70,7 +70,7 @@ public class ShiroConfig {
   public DefaultWebSessionManager mySessionManager(){
     DefaultWebSessionManager defaultSessionManager = new DefaultWebSessionManager();
     //将sessionIdUrlRewritingEnabled属性设置成false
-    defaultSessionManager.setGlobalSessionTimeout(6000L);
+//    defaultSessionManager.setGlobalSessionTimeout(6000L);
     defaultSessionManager.setSessionIdUrlRewritingEnabled(false);
     return defaultSessionManager;
   }
@@ -85,9 +85,9 @@ public class ShiroConfig {
       //设为true后，只能通过http访问，javascript无法访问
       //防止xss读取cookie
       simpleCookie.setHttpOnly(true);
-      simpleCookie.setPath("/manage");
+      //simpleCookie.setPath("/manage");
       //<!-- 记住我cookie生效时间30天 ,单位秒;-->
-//      simpleCookie.setMaxAge(86400);
+      simpleCookie.setMaxAge(86400);
       return simpleCookie;
     }
 
@@ -96,7 +96,7 @@ public class ShiroConfig {
     CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
     cookieRememberMeManager.setCookie(rememberMeCookie());
     //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
-    cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
+    cookieRememberMeManager.setCipherKey(Base64.decode("6ZmI6I2j5Y+R5aSn5ZOlAA=="));
     return cookieRememberMeManager;
   }
 

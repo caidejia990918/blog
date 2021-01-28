@@ -34,6 +34,7 @@ public class ShiroConfig {
 
           filtermap.put("/manage/**","user");
           filtermap.put("/css/**","anon");
+          filtermap.put("/photograph","user");
           bean.setFilterChainDefinitionMap(filtermap);
           bean.setLoginUrl("/login");//当访问权限范围外的页面时 会自动跳转到改页面
 //        bean.setUnauthorizedUrl("/unauth");

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <!--标签图标-->
+
+    <link th:href="@{/lib/semantic-ui/semantic.min.css}">
+    <link th:href="@{/lib/animate/animate.min.css}"/>
+    <link th:href="@{/css/me.css}"/>
+
+    <!--推荐栏翻转效果-->
+    <link th:href="@{/lib/cardFlip/recommend.css}"/>
+
+    <!--必须在页面顶部引入的js资源-->
+    <script th:src="@{/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/lib/semantic-ui/semantic.min.js}"></script>
+    <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/lib/lazyload/jquery.lazyload.js}"></script>
+
+
+
+
+</head>
+<body th:style="'background:url(' + ${session.config.siteBgUrl}+')'">
+<img src="../static/images/about.jpg" th:src="${session.config.siteBgUrl}" alt="" class="ui m-bg image" id="bg_img">
+<!--导航-->
+<nav th:replace="~{common/common::nav(active='blogs')}"></nav>
+<!--音乐插件-->
+<div th:replace="~{common/common::music}"></div>
+<!--热门博客-->
+<div class="ui m-padded-tb-large m-margin-top-largex">
+    <div class="ui  container  wow animate__animated animate__fadeIn" style="margin-top: 1em !important;
+    margin-bottom: 1em !important;">
+        <div align="center" class="ui secondary segment m-bg-opacity ">
+            <i class="bookmark icon"></i>热门博客
+        </div>
+    </div>
+    <div class="ui stackable m-container-mini m-opacity grid">
+        <div class="m-margin-tb-tiny four wide column recommend wow animate__animated  "
+             th:each="blog : ${recommendedBlogs}"
+             th:classappend="${((blogStat.index+1)<=2)?'animate_'+'_fadeInLeft':'animate_'+'_fadeInRight'}"
+             data-wow-duration="1.5s">
+            <div class="wrapper">
+                <div class="cols">
+                    <div class="container">
+                        <a class="class_outer front" href="#"
+                           th:href="@{/blog/{id}(id=${blog.id})}">
+                            <img alt="" class="ui rounded image"
+                                 th:src="@{${blog.firstPicture}}" style="min-height: 201.55px;">
+                            <span class="class_cover">
+                                     <h4 class="m-font-size-blog-text m-margin-tb-tiny"
+                                         th:text="${blog.title}">大圣，此去欲何?</h4>
+                                    </span>
+                        </a>
+                        <a class="class_outer back" href="#" style="text-decoration:none;color:#333;"
+                           th:href="@{/blog/{id}(id=${blog.id})}">
+                            <div class="inner">
+                                            <span id="description"
+                                                  th:text="${#strings.abbreviate(blog.description,120)}"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--博客列表-->
+<div class="m-margin-bottom-small m-padded-tb-large">
+    <div class="ui container  wow animate__animated animate__fadeIn">
+        <div align="center" class="ui secondary segment m-bg-opacity">
+            <i class="bookmark icon"></i>最新博客
+        </div>
+    </div>
+    <div class="ui container m-margin-top-largex">
+        <div class="ui stackable grid">
+            <!--博客内容-->
+            <div class="ui vertical segment">
+                <!--博客列表-->
+                <div th:replace="~{common/common::blogList}"></div>
+                <!--分页-->
+                <div th:replace="~{common/common::pagination(active='blogs')}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--工具栏-->
+<div class="m-padded-tb-hugex m-fixed m-right-bottom" id="toolbar">
+    <div class="ui vertical icon buttons ">
+        <button id="tag-btn" class="ui toc teal button">标签</button>
+        <button id="category-btn" class="ui teal button">分类</button>
+        <div class="ui icon button" id="toTop"><i class="chevron up icon"></i></div>
+    </div>
+</div>
+<!--分类栏-->
+<div class="ui segments category-container flowing popup transition hidden"
+     style="width: 250px!important;padding: 0 !important;">
+    <div class="ui secondary segment">
+        <div class="ui two column grid">
+            <div class="column"><i class="clone icon"></i>分类</div>
+            <div class="right aligned column"><a th:href="@{/types}" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">
+                more <i
+                    class="angle double right icon"></i></a></div>
+        </div>
+    </div>
+    <div class="ui teal segment">
+        <div class="ui fluid vertical menu"><a th:href="@{/types/{id}(id=${type.id})}"
+                                               th:each="type,typeStat:${types}"
+                                               class="item md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
+                                               th:if="${typeStat.index} lt 5"><span
+                th:text="${type.name}">学习笔记</span>
+            <div class="ui teal basic left pointing label" th:text="${type.blogCount}">26</div>
+        </a></div>
+    </div>
+</div>
+<!--标签栏-->
+<div class="ui segments tag-container flowing popup transition hidden"
+     style="width: 250px!important;padding: 0 !important;">
+    <div class="ui secondary segment">
+        <div class="ui two column grid">
+            <div class="column"><i class="tags icon"></i>标签</div>
+            <div class="right aligned column">
+                <a th:href="@{/tags}" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc" style="margin: 8px !important;">
+                    more
+                    <i class="angle double right icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="ui teal segment">
+        <a href="#" th:each="tag,tagStat: ${tags}" th:href="@{/tags/{id}(id=${tag.id})}" class="ui left pointing label "
+           th:classappend="'basic '+${tag.color}" th:text="${tag.name}+'    '+${tag.blogCount}"
+           th:if="${tagStat.index} lt 6" style="margin: 4px;!important;">好文</a>
+    </div>
+</div>
+<div th:replace="~{common/common::blogMessage}"></div>
+<!--页面底部-->
+<footer th:replace="~{common/common::footer}">
+</footer>
+</body>
+<script src="../static/lib/wow/wow.min.js" th:src="@{/lib/wow/wow.min.js}"></script>
+<script src="../static/lib/jquery/jquery.scrollTo.min.js" th:src="@{/lib/jquery/jquery.scrollTo.min.js}"></script>
+<script>
+    new WOW().init();
+    $('#toTop').click(function () {
+        $(window).scrollTo(0, 500);
+    });
+    $('#tag-btn').popup({
+        popup: $('.tag-container'),
+        on: 'click',
+        position: 'left center'
+    });
+    $('#category-btn').popup({
+        popup: $('.category-container'),
+        on: 'click',
+        position: 'left center'
+    });
+    $(function() {
+        $("img.image").lazyload({
+            effect: "fadeIn",
+            placeholder:"/images/loading.gif",
+            threshold: 200, // 提前开始加载
+        });
+    });
+
+</script>
+</html>

@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,8 +21,7 @@ public class Dairy {
   private Long id;
   private String title;
   private String description;
-  private String content;
-
+  private String format;
   @JsonFormat(pattern="yyyy-MM-dd")
-  private LocalDateTime created;
+  private Date created;
 }

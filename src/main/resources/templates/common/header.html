@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
+<!-- Top Search Form Area -->
+<div class="top-search-area" th:fragment="top">
+  <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <!-- Close -->
+          <button type="button" class="btn close-btn" data-dismiss="modal"><i
+            class="ti-close"></i></button>
+          <!-- Form -->
+          <form action="index.html" method="post">
+            <input type="search" name="top-search-bar" class="form-control"
+                   placeholder="Search and hit enter...">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Header Area Start -->
 <header class="header-area" th:fragment="header">
   <!-- Main Header Start -->
@@ -25,14 +46,21 @@
               <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
             </div>
             <!-- Nav Start -->
-            <div class="classynav">
+            <div class="classynav" >
               <ul id="nav">
-                <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/photograph}">photograph</a></li>
-                <li><a th:href="@{gallery}">Gallery</a></li>
-                <li><a th:href="@{/blog}">Dairy</a></li>
-                <li><a th:href="@{/study}">Study</a></li>
-                <li><a th:href="@{/manage}">Admin</a></li>
+                <li th:classappend="${active=='index'?'active':''}"><a th:href="@{/}">主页</a></li>
+                <li th:classappend="${active=='photograph'?'active':''}"><a th:href="@{/photograph}">照片</a></li>
+                <li th:classappend="${active=='gallery'?'active':''}"><a th:href="@{gallery}">展览</a></li>
+                <li th:classappend="${active=='dairy'?'active':''}"><a th:href="@{/dairy}">时间轴</a></li>
+                <li th:classappend="${active=='study'?'active':''}"><a th:href="@{/study}">文章</a></li>
+                <li ><a th:href="@{/manage}">Admin</a>
+                  <ul class="dropdown">
+                    <li th:classappend="${active=='addPhoto'?'active':''}"><a th:href="@{/manage/addPhoto}">- 添加照片</a></li>
+                    <li th:classappend="${active=='show'?'active':''}"><a th:href="@{/manage/show}">- 编辑照片</a></li>
+                    <li th:classappend="${active=='artical'?'active':''}"><a th:href="@{/manage/artical}">- 文章管理</a></li>
+                    <li th:classappend="${active=='dairyManage'?'active':''}"><a th:href="@{/manage/dairy}">- 时间轴管理</a></li>
+                  </ul>
+                </li>
               </ul>
               <!-- Search Icon -->
               <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i

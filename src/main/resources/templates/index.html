@@ -15,37 +15,17 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" th:href="@{/style.css}">
+  <script th:src="@{/lib/lazyload/jquery.lazyload.js}"></script>
 
 </head>
 
 <body>
-<!-- Preloader -->
 
-<!-- /Preloader -->
 
-<!-- Top Search Form Area -->
-<div class="top-search-area">
-  <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <!-- Close -->
-          <button type="button" class="btn close-btn" data-dismiss="modal"><i
-            class="ti-close"></i></button>
-          <!-- Form -->
-          <form action="index.html" method="post">
-            <input type="search" name="top-search-bar" class="form-control"
-                   placeholder="Search and hit enter...">
-            <button type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<div th:insert="~{common/header::top}"></div>
 
 <!-- Header Area Start -->
-<header th:insert="~{common/header::header}">
+<header th:insert="~{common/header::header(active='index')}">
 </header>
 <!-- Header Area End -->
 
@@ -109,9 +89,9 @@
     <div class="row alime-portfolio" >
       <!-- Single Gallery Item -->
       <div class="col-12 col-sm-6 col-lg-3 single_gallery_item mb-30 wow fadeInUp"
-           th:data-wow-delay="${r*100%500}" th:each="r:${random}" th:with="photo=${photos.get(r)}" th:classappend="${photo.getCategory()}" id="ff">
+           th:data-wow-delay="${r*100%500}+'ms'" th:each="r:${random}" th:with="photo=${photos.get(r)}" th:classappend="${photo.getCategory()}" id="ff">
         <div class="single-portfolio-content" >
-          <img th:src="@{/photosf/}+${photo.getNamef()}" alt="">
+          <img th:src="@{/photosf/}+${photo.getNamef()}"class="ff" alt="">
           <div class="hover-content">
             <a th:href="@{/photos/}+${photo.getName()}"  class="portfolio-img">+</a>
           </div>
@@ -251,6 +231,8 @@
     var url = imgs[i].dataset.src;
     loadImage(imgs[i],url,showImage);
   }
+
+
 </script>
 
 

@@ -30,18 +30,16 @@ public class photoController {
   PhotoService photoService;
   private String path = "/Users/cdj990918/Downloads/photo/";
   private String path2 = "/Users/cdj990918/Downloads/flash/";
+//  private String path = "/root/photo/";
+//  private String path2 = "/root/flash/";
 
 
 
 
-  @RequestMapping("/manage")
-  public String PhotoManage(){
-    return "/photoManage/manage";
-  }
 
   @RequestMapping("/manage/addPhoto")
   public String addPhoto(){
-    return "/photoManage/addPhoto";
+    return "photoManage/addPhoto";
   }
 
   @RequestMapping("/upload")
@@ -59,7 +57,7 @@ public class photoController {
         }
         else{
           model.addAttribute("msg","上传失败，请上传图片");
-          return "/photoManage/addPhoto";
+          return "photoManage/addPhoto";
         }
 
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(path+file.getOriginalFilename())));
@@ -79,11 +77,11 @@ public class photoController {
         e.printStackTrace();
 
         model.addAttribute("msg", "上传失败," + e.getMessage());
-        return "/photoManage/addPhoto";
+        return "photoManage/addPhoto";
       } catch (IOException e) {
         e.printStackTrace();
         model.addAttribute("msg","上传失败," + e.getMessage());
-        return "/photoManage/addPhoto";
+        return "photoManage/addPhoto";
       }
 
       Photo photo = new Photo();
@@ -99,14 +97,14 @@ public class photoController {
         model.addAttribute("msg","上传失败，照片已存在");
       }finally {
         model.addAttribute("msg","上传成功");
-        return "/photoManage/addPhoto";
+        return "photoManage/addPhoto";
       }
 
 
 
     } else {
       model.addAttribute("msg", "上传失败，因为文件是空的.");
-      return "/photoManage/addPhoto";
+      return "photoManage/addPhoto";
     }
   }
   @RequestMapping("/manage/show")
@@ -115,7 +113,7 @@ public class photoController {
 //    String path = "/Users/cdj990918/Downloads/Photo/";
 //    File[] files = new File(path).listFiles();
     model.addAttribute("photos", Photos);
-    return "/photoManage/showPhotos";
+    return "photoManage/showPhotos";
   }
 @RequestMapping("/manage/show/delete/{id}")
   public String deletePhoto(@PathVariable("id")Long id){

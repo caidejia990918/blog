@@ -14,6 +14,7 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" th:href="@{/style.css}">
+  <script th:src="@{/lib/lazyload/jquery.lazyload.js}"></script>
 
 </head>
 
@@ -25,26 +26,10 @@
     <!-- /Preloader -->
 
     <!-- Top Search Form Area -->
-    <div class="top-search-area">
-        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <!-- Close -->
-                        <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
-                        <!-- Form -->
-                        <form action="index.html" method="post">
-                            <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
-                            <button type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:insert="~{common/header::top}"></div>
 
     <!-- Header Area Start -->
-   <header th:insert="~{common/header::header}"></header>
+   <header th:insert="~{common/header::header(active='photograph')}"></header>
     <!-- Header Area End -->
 
     <!-- Breadcrumb Area Start -->
@@ -90,7 +75,7 @@
         <div class="row alime-portfolio" >
           <!-- Single Gallery Item -->
           <div class="col-12 col-sm-6 col-lg-3 single_gallery_item mb-30 wow fadeInUp"
-               th:data-wow-delay="${photoStat.index*100}" th:each="photo:${photos}" th:classappend="${photo.getCategory()}" >
+               th:data-wow-delay="${photoStat.index*100%500}+'ms'" th:each="photo:${photos}" th:classappend="${photo.getCategory()}" >
             <div class="single-portfolio-content" >
               <img th:src="@{/photosf/}+${photo.getNamef()}" alt="">
               <div class="hover-content">
@@ -202,6 +187,37 @@
     <!-- Active -->
     <script th:src="@{/js/default-assets/active.js}"></script>
 
+<script>
+
+  function loadImage(obj,url,callback)
+  {
+    var img = new Image();
+    img.src = url;
+
+    // 判断图片是否在缓存中
+    if(img.complete){
+      callback.call(img,obj);
+      return;
+    }
+
+    // 图片加载到浏览器的缓存中回调函数
+    img.onload = function(){
+      callback.call(img,obj);
+    }
+  }
+
+  function showImage(obj){
+    obj.src = this.src;
+  }
+
+  var imgs = document.querySelectorAll('img');
+  for(var i = 0;i<imgs.length;i++)
+  {
+    var url = imgs[i].dataset.src;
+    loadImage(imgs[i],url,showImage);
+  }
+
+</script>
 </body>
 
 </html>

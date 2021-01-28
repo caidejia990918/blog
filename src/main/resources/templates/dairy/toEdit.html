@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>AddDairy</title>
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
+  <link rel="icon" th:href="@{/img/core-img/favicon.png}">
+
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <style>
+    .center-in-center{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    body{
+      background:url(/img/bg-img/3.jpg)no-repeat;
+      width:100%;
+      height:100%;
+      background-size:100% 100%;
+      position:absolute;
+      filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
+    }
+  </style>
+</head>
+
+<body>
+<div class="center-in-center">
+  <form class="ui form" th:action="@{/manage/dairy/edit/submit/}+${dairy.getId()}" style="width: 500px">
+    <div class="field">
+      <label>标题</label>
+      <input type="text" name="title" placeholder="标题.." th:value="${dairy.getTitle()}">
+    </div>
+    <div class="field">
+      <label>短文本</label>
+      <textarea rows="2" name="description" th:text="${dairy.getDescription()}"></textarea>
+    </div>
+    Date: <input type="date" name="date" th:value="${dairy.getCreated()}"/>
+    <button class="ui button" type="submit">Submit</button>
+  </form>
+</div>
+</body>
+</html>

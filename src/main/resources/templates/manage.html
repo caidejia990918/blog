@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
@@ -15,7 +16,7 @@
   <link rel="stylesheet" th:href="@{/style.css}">
   <style>
     .center-in-center{
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
@@ -40,20 +41,23 @@
 <div th:insert="~{common/header::top}"></div>
 <header th:insert="~{common/header::header(active='Admin')}">
 </header>
-<div class="center-in-center">
-  <div>
-    <a class="ui secondary basic big button " th:href="@{/manage/addPhoto}">添加照片</a>
-  </div>
- <div style="margin-top: 20px">
-   <a class="ui secondary basic big button" th:href="@{/manage/show}">编辑照片</a>
- </div>
-  <div style="margin-top: 20px">
-    <a class="ui secondary basic big button" th:href="@{/manage/show}">文章管理</a>
-  </div>
-  <div style="margin-top: 20px">
-    <a class="ui secondary basic big button" th:href="@{/manage/dairy}">时间轴管理</a>
+<div class="alime-portfolio-area section-padding-80 clearfix">
+      <div class="center-in-center">
+        <div>
+          <a class="ui secondary basic big button " th:href="@{/manage/addPhoto}">添加照片</a>
+        </div>
+        <div style="margin-top: 20px">
+          <a class="ui secondary basic big button" th:href="@{/manage/show}">编辑照片</a>
+        </div>
+        <div style="margin-top: 20px">
+          <a class="ui secondary basic big button" th:href="@{/manage/show}">文章管理</a>
+        </div>
+        <div style="margin-top: 20px">
+          <a class="ui secondary basic big button" th:href="@{/manage/dairy}">时间轴管理</a>
+    </div>
   </div>
 </div>
+
 
 <!-- jQuery 2.2.4 -->
 <script th:src="@{/js/jquery.min.js}"></script>

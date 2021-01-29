@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>AddDairy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
@@ -10,16 +11,7 @@
 
   <link rel="stylesheet" th:href="@{/style.css}">
   <style>
-    .center-in-center{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
+
     body{
       background:url(/img/bg-img/3.jpg)no-repeat;
       width:100%;
@@ -32,7 +24,11 @@
 </head>
 
 <body>
-<div class="center-in-center">
+<header th:insert="~{common/header::header(active='dairyManage')}">
+</header>
+
+<div class="alime-portfolio-area section-padding-80  clearfix">
+<div style="margin-left: 32%">
   <form class="ui form" th:action="@{/manage/dairy/edit/submit/}+${dairy.getId()}" style="width: 500px">
     <div class="field">
       <label>标题</label>
@@ -46,5 +42,18 @@
     <button class="ui button" type="submit">Submit</button>
   </form>
 </div>
+</div>
+
+<!-- jQuery 2.2.4 -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- Popper -->
+<script th:src="@{/js/popper.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!-- All Plugins -->
+<script th:src="@{/js/alime.bundle.js}"></script>
+<!-- Active -->
+<script th:src="@{/js/default-assets/active.js}"></script>
+
 </body>
 </html>

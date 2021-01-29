@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>AddDairy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
@@ -27,9 +28,27 @@
 <div th:insert="~{common/header::top}"></div>
 <header th:insert="~{common/header::header(active='Admin')}">
 </header>
-<div style="height: 90px;background-color: #0e90d2">
 
-</div>
+
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/img/bg-img/fff.jpg);">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12">
+        <div class="breadcrumb-content text-center">
+          <h2 class="page-title">时间轴管理</h2>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a th:href="@{/}"><i class="icon_house_alt"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">时间轴管理</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="alime-portfolio-area section-padding-80 clearfix">
 <div class="ui piled segment" th:each="dd:${dairy}">
   <h4 class="ui header"th:text="${dd.getTitle()}">头部</h4>
   <p th:text="${dd.getDescription()}">Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
@@ -37,7 +56,7 @@
   <a class="positive ui button" th:href="@{/manage/dairy/edit/}+${dd.getId()}">编辑</a>
   <button class="negative ui button" th:onclick="myFunction([[${dd.getId}]])" >删除</button>
 </div>
-
+</div>
 <script>
   function myFunction(a) {
     var txt;

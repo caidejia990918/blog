@@ -27,10 +27,10 @@ public class loginController {
   }
 
   @RequestMapping("/tologin")
-  public  void tologin(String username, String password, boolean rememberMe, HttpSession session,
+  public  void tologin(String username, String password, HttpSession session,
     HttpServletRequest req, HttpServletResponse resp) throws IOException {
     Subject subject = SecurityUtils.getSubject();
-    UsernamePasswordToken token = new UsernamePasswordToken(username, SecureUtil.md5(password),rememberMe);
+    UsernamePasswordToken token = new UsernamePasswordToken(username, SecureUtil.md5(password));
     SavedRequest savedRequest= WebUtils.getSavedRequest(req);
     try {
       subject.login(token);//执行登陆的方法

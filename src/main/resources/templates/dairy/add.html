@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>AddDairy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
@@ -10,6 +11,15 @@
 
   <link rel="stylesheet" th:href="@{/style.css}">
 <style>
+
+  body{
+    background:url(/img/bg-img/3.jpg)no-repeat;
+    width:100%;
+    height:100%;
+    background-size:100% 100%;
+    position:absolute;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
+  }
   .center-in-center{
     position: absolute;
     top: 50%;
@@ -20,14 +30,6 @@
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
-  body{
-    background:url(/img/bg-img/3.jpg)no-repeat;
-    width:100%;
-    height:100%;
-    background-size:100% 100%;
-    position:absolute;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
-  }
 </style>
 </head>
 
@@ -35,6 +37,7 @@
 <div th:insert="~{common/header::top}"></div>
 <header th:insert="~{common/header::header(active='Admin')}">
 </header>
+
 <div class="center-in-center">
   <form class="ui form" th:action="@{/manage/dairy/add/submit}" style="width: 500px">
     <div class="field">
@@ -49,7 +52,6 @@
     <button class="ui button" type="submit">Submit</button>
   </form>
 </div>
-
 <!-- jQuery 2.2.4 -->
 <script th:src="@{/js/jquery.min.js}"></script>
 <!-- Popper -->

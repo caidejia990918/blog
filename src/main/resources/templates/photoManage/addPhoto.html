@@ -11,7 +11,7 @@
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
   <link rel="icon" th:href="@{/img/core-img/favicon.png}">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" th:href="@{/style.css}">
   <style>
     .center-in-center{
@@ -24,54 +24,63 @@
       -o-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
-    body{
-      background:url(/img/bg-img/3.jpg)no-repeat;
-      width:100%;
-      height:100%;
-      background-size:100% 100%;
-      position:absolute;
-      filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
-    }
+
   </style>
 </head>
 <body>
 <div th:insert="~{common/header::top}"></div>
 <header th:insert="~{common/header::header(active='addPhoto')}">
 </header>
-<div style="text-align: center;margin-top:10%" >
-  <h1 style="color: #7abaff">
-    图片添加
-  </h1>
-</div>
 
-<div class="center-in-center" style="width: 500px;background-color: #7abaff;text-align: center">
-  <form class="ui form" method="POST" enctype="multipart/form-data" th:action="@{/upload}">
-    <div>
-      <div class="field">
-        <label>照片分类</label>
-        <div class="ui selection dropdown">
-          <input type="hidden" name="category">
-          <i class="dropdown icon"></i>
-          <div class="default text">照片分类</div>
-          <div class="menu" >
-            <div class="item" data-value="QingDao">青岛</div>
-            <div class="item" data-value="ShuZhou">苏州</div>
-            <div class="item" data-value="NanJing">南京</div>
-            <div class="item" data-value="WuXi">无锡</div>
-            <div class="item" data-value="Family">家人</div>
-            <div class="item" data-value="Life">生活</div>
-          </div>
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/img/bg-img/fff.jpg);">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12">
+        <div class="breadcrumb-content text-center">
+          <h2 class="page-title">照片添加</h2>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a th:href="@{/}"><i class="icon_house_alt"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">照片添加</li>
+            </ol>
+          </nav>
         </div>
       </div>
-      <input type="file" name="file"/>
-      <button class="ui button" type="submit" >Submit</button>
     </div>
-  </form>
+  </div>
+</section>
 
-  <div th:if="${msg!=null}" style="text-align: center">
-    <h3 style="color: red" th:text="${msg}"></h3>
+<div class="alime-portfolio-area section-padding-80 clearfix">
+  <div class="center-in-center" style="width: 500px;background-color: #7abaff;text-align: center">
+    <form class="ui form" method="POST" enctype="multipart/form-data" th:action="@{/upload}">
+      <div>
+        <div class="field">
+          <label>照片分类</label>
+          <div class="ui selection dropdown">
+            <input type="hidden" name="category">
+            <i class="dropdown icon"></i>
+            <div class="default text">照片分类</div>
+            <div class="menu" >
+              <div class="item" data-value="QingDao">青岛</div>
+              <div class="item" data-value="ShuZhou">苏州</div>
+              <div class="item" data-value="NanJing">南京</div>
+              <div class="item" data-value="WuXi">无锡</div>
+              <div class="item" data-value="Family">家人</div>
+              <div class="item" data-value="Life">生活</div>
+            </div>
+          </div>
+        </div>
+        <input type="file" name="file"/>
+        <button class="ui button" type="submit" >Submit</button>
+      </div>
+    </form>
+
+    <div th:if="${msg!=null}" style="text-align: center">
+      <h3 style="color: red" th:text="${msg}"></h3>
+    </div>
   </div>
 </div>
+
 
 
 

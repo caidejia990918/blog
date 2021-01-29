@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" th:href="@{/css/ff.css}">
   <link rel="stylesheet" th:href="@{/timeline/css/style.css}">
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css}"/>
-<!--  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>-->
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js}"></script>
   <title>dairy</title>
   <!-- Favicon -->
@@ -15,13 +16,11 @@
   <link rel="stylesheet" th:href="@{/style.css}">
 <style>
   body{
-    background:url(/img/bg-img/f3.jpg)no-repeat;
+    background:url(/img/bg-img/fl.jpg);
     width:100%;
     height:100%;
     background-size:100% 100%;
     position:absolute;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
-
   }
 </style>
 
@@ -30,20 +29,23 @@
 <header th:insert="~{common/header::header(active='dairy')}">
 </header>
 
-<div style="margin-top: 90px;">
-  <ul class="timeline" >
-    <!-- Item 1 -->
-    <li th:each="dd:${dairy}" >
-      <div  th:classappend="${dd.getId()%2==0}?'direction-r':'direction-l'">
-        <div class="flag-wrapper">
-          <span class="flag" th:text="${dd.getTitle()}"></span>
-          <span class="time-wrapper"><span class="time" th:text="${dd.getFormat()}"></span></span>
+<div class="alime-portfolio-area section-padding-80 clearfix">
+  <div >
+    <ul class="timeline" >
+      <!-- Item 1 -->
+      <li th:each="dd:${dairy}" >
+        <div  th:classappend="${dd.getId()%2==0}?'direction-r':'direction-l'">
+          <div class="flag-wrapper">
+            <span class="flag" th:text="${dd.getTitle()}"></span>
+            <span class="time-wrapper"><span class="time" th:text="${dd.getFormat()}"></span></span>
+          </div>
+          <div class="desc" th:text="${dd.getDescription()}" ></div>
         </div>
-        <div class="desc" th:text="${dd.getDescription()}" ></div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>
+
 
 
 <!-- Follow Area Start -->

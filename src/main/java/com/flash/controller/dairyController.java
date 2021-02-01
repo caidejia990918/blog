@@ -22,7 +22,7 @@ public class dairyController {
 
 
   @Autowired
-  DairyServiceImpl dairyService;
+  DairyService dairyService;
 
 
 

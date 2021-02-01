@@ -52,12 +52,11 @@
                 <li th:classappend="${active=='photograph'?'active':''}"><a th:href="@{/photograph}">照片</a></li>
                 <li th:classappend="${active=='gallery'?'active':''}"><a th:href="@{gallery}">展览</a></li>
                 <li th:classappend="${active=='dairy'?'active':''}"><a th:href="@{/dairy}">时间轴</a></li>
-                <li th:classappend="${active=='study'?'active':''}"><a th:href="@{/study}">文章</a></li>
+                <li th:classappend="${active=='article'?'active':''}"><a th:href="@{/articles/1}">文章</a></li>
                 <li ><a th:href="@{/manage}">Admin</a>
-                  <ul class="dropdown">
-                    <li th:classappend="${active=='addPhoto'?'active':''}"><a th:href="@{/manage/addPhoto}">- 添加照片</a></li>
-                    <li th:classappend="${active=='show'?'active':''}"><a th:href="@{/manage/show}">- 编辑照片</a></li>
-                    <li th:classappend="${active=='artical'?'active':''}"><a th:href="@{/manage/artical}">- 文章管理</a></li>
+                  <ul class="dropdown" th:if="${session.admin!=null}">
+                    <li th:classappend="${active=='photoManage'?'active':''}"><a th:href="@{/manage/photo}">- 照片管理</a></li>
+                    <li th:classappend="${active=='articleManage'?'active':''}"><a th:href="@{/manage/article}">- 文章管理</a></li>
                     <li th:classappend="${active=='dairyManage'?'active':''}"><a th:href="@{/manage/dairy}">- 时间轴管理</a></li>
                   </ul>
                 </li>
@@ -74,5 +73,56 @@
   </div>
 </header>
 <!-- Header Area End -->
+
+
+<ff class="header-area" th:fragment="hello">
+  <!-- Main Header Start -->
+  <div class="main-header-area">
+    <div class="classy-nav-container breakpoint-off">
+      <div class="container">
+        <!-- Classy Menu -->
+        <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+          <!-- Logo -->
+          <a class="nav-brand" th:href="@{/}"><img th:src="@{/img/core-img/logo3.png}" alt=""></a>
+
+          <!-- Navbar Toggler -->
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
+
+          <!-- Menu -->
+          <div class="classy-menu">
+            <!-- Menu Close Button -->
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+            <!-- Nav Start -->
+            <div class="classynav" >
+              <ul id="nav">
+                <li th:classappend="${active=='index'?'active':''}"><a th:href="@{/}">主页</a></li>
+                <li th:classappend="${active=='photograph'?'active':''}"><a th:href="@{/photograph}">照片</a></li>
+                <li th:classappend="${active=='gallery'?'active':''}"><a th:href="@{gallery}">展览</a></li>
+                <li th:classappend="${active=='dairy'?'active':''}"><a th:href="@{/dairy}">时间轴</a></li>
+                <li th:classappend="${active=='article'?'active':''}"><a th:href="@{/articles/1}">文章</a></li>
+                <li ><a th:href="@{/manage}">Admin</a>
+                  <ul class="dropdown" th:if="${session.admin!=null}">
+                    <li th:classappend="${active=='photoManage'?'active':''}"><a th:href="@{/manage/photo}">- 照片管理</a></li>
+                    <li th:classappend="${active=='articleManage'?'active':''}"><a th:href="@{/manage/article}">- 文章管理</a></li>
+                    <li th:classappend="${active=='dairyManage'?'active':''}"><a th:href="@{/manage/dairy}">- 时间轴管理</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <!-- Search Icon -->
+              <div class="search-icon" data-toggle="modal" data-target="#searchModal" style="margin-left: -10px"><i
+                class="ti-search"></i></div>
+            </div>
+            <!-- Nav End -->
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</ff>
 </body>
 </html>

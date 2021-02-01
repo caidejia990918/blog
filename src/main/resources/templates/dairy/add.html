@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
     <title>AddDairy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,19 +46,13 @@
       <input type="text" name="title" placeholder="标题..">
     </div>
     <div class="field">
-      <label>短文本</label>
+      <label>内容</label>
       <textarea rows="2" name="description"></textarea>
     </div>
     Date: <input type="date" name="date" />
     <button class="ui button" type="submit">Submit</button>
   </form>
 </div>
-<!-- jQuery 2.2.4 -->
-<script th:src="@{/js/jquery.min.js}"></script>
-<!-- Popper -->
-<script th:src="@{/js/popper.min.js}"></script>
-<!-- Bootstrap -->
-<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- All Plugins -->
 <script th:src="@{/js/alime.bundle.js}"></script>
 <!-- Active -->

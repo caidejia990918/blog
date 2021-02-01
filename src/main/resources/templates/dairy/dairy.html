@@ -17,10 +17,10 @@
 <style>
   body{
     background:url(/img/bg-img/fl.jpg);
-    width:100%;
-    height:100%;
-    background-size:100% 100%;
-    position:absolute;
+    /*width:100%;*/
+    /*height:100%;*/
+    /*background-size:100% 100%;*/
+    /*position:absolute;*/
   }
 </style>
 
@@ -28,6 +28,8 @@
 <body >
 <header th:insert="~{common/header::header(active='dairy')}">
 </header>
+<!--<img th:src="@{/img/bg-img/fl.jpg}" alt="" class="ui m-bg image" id="bg_img">-->
+
 
 <div class="alime-portfolio-area section-padding-80 clearfix">
   <div >
@@ -130,12 +132,6 @@
 <!-- Footer Area Start -->
 <footer th:insert="~{common/footer::footer}">
 </footer>
-<!-- Footer Area End -->
-<script th:src="@{/js/jquery.min.js}"></script>
-<!-- Popper -->
-<script th:src="@{/js/popper.min.js}"></script>
-<!-- Bootstrap -->
-<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- All Plugins -->
 <script th:src="@{/js/alime.bundle.js}"></script>
 <!-- Active -->

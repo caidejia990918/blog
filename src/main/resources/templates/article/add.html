@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>add</title>
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+     <link rel="icon" th:href="@{/img/core-img/favicon.png}">
+    <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+     <link rel="stylesheet" th:href="@{/editormd/css/editormd.css}" />
+</head>
+
+<body>
+
+    <div >
+        <form class="ui form" th:action="@{/manage/article/add/submit}" >
+            <div class="field">
+              <label>标题</label>
+              <input type="text" name="title" placeholder="标题...">
+            </div>
+            <div class="field">
+              <label>描述</label>
+              <input type="text" name="description" placeholder="描述...">
+            </div>
+          <div class="field">
+            <label>分类</label>
+            <input type="text" name="category" placeholder="类别...">
+          </div>
+          <div id="test-editor">
+    <textarea style="display:none;" name="content" id="cdj"></textarea>
+          </div>
+
+
+          <input type="text" name ="text" style="display: none" id="fuck">
+<!--          <input type="text" name ="text" style="display: none" id="ff">-->
+            <button class="ui button" id = "btn" type="submit">Submit</button>
+          </form>
+
+    </div>
+
+    <!-- 引入 wangEditor.min.js -->
+<!--    <script type="text/javascript">-->
+<!--        const E = window.wangEditor-->
+<!--        const editor = new E('#div1')-->
+<!--        // 或者 const editor = new E( document.getElementById('div1') )-->
+<!--        editor.config.height = 300;-->
+<!--        editor.config.width = 100;-->
+<!--        editor.create()-->
+<!--        console.log(editor.txt.html());-->
+
+
+<!--    </script>-->
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script th:src="@{/editormd/editormd.min.js}"></script>
+    <script type="text/javascript">
+      $(function() {
+        var editor = editormd("test-editor", {
+          // width  : "100%",
+          height : "700px",
+          path   : "/editormd/lib/",
+          editorTheme: "pastel-on-dark",
+          theme: "dark",
+          previewTheme: "dark",
+          saveHTMLToTextarea : true,
+          emoji : true,
+          tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+          flowChart : true,             // 开启流程图支持，默认关闭
+          imageUpload       : true,//设置为true后就开启了图片文件上传
+          imageFormats      : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+          imageUploadURL    : "/article/img/upload"
+        });
+        $("#btn").click(function () {
+            $("#fuck").val(editor.getPreviewedHTML());
+            // alert(editor.getPreviewedHTML());
+            // alert(editor.getHTML());
+          }
+        )
+        // console.log(editor.getValue());
+      });
+
+
+
+    </script>
+</body>
+
+</html>

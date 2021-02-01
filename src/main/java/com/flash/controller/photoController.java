@@ -34,10 +34,13 @@ public class photoController {
 //  private String path2 = "/root/flash/";
 
 
+  @RequestMapping("/manage/photo")
+  public String PhotoManage(){
+    return "photoManage/photoManage";
+  }
 
 
-
-  @RequestMapping("/manage/addPhoto")
+  @RequestMapping("/manage/photo/addPhoto")
   public String addPhoto(){
     return "photoManage/addPhoto";
   }
@@ -107,7 +110,7 @@ public class photoController {
       return "photoManage/addPhoto";
     }
   }
-  @RequestMapping("/manage/show")
+  @RequestMapping("/manage/photo/show")
   public String showPhotos(Model model){
     List<Photo> Photos = photoService.list(new QueryWrapper<Photo>());
 //    String path = "/Users/cdj990918/Downloads/Photo/";
@@ -129,7 +132,7 @@ public class photoController {
   {
     System.out.println("删除失败");
   }
-  return  "redirect:/manage/show";
+  return  "redirect:/manage/photo/show";
   }
 
   @RequestMapping("/manage/show/edit/{id}")
@@ -138,7 +141,7 @@ public class photoController {
     Photo one = photoService.getOne(photo);
     one.setCategory(name);
     photoService.saveOrUpdate(one);
-    return  "redirect:/manage/show";
+    return  "redirect:/manage/photo/show";
   }
 
   @RequestMapping("/")

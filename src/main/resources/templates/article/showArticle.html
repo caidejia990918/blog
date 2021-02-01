@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>article</title>
+  <link rel="icon" th:href="@{/img/core-img/favicon.png}">
+  <link rel="stylesheet" href="../static/lib/semantic-ui/semantic.min.css" th:href="@{/lib/semantic-ui/semantic.min.css}">
+  <link rel="stylesheet" href="../static/lib/animate/animate.min.css" th:href="@{/lib/animate/animate.min.css}"/>
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+  <!--推荐栏翻转效果-->
+  <link href="../static/lib/cardFlip/recommend.css" rel="stylesheet" th:href="@{/lib/cardFlip/recommend.css}"/>
+  <!--必须在页面顶部引入的js资源-->
+  <script src="../static/lib/jquery/jquery.min.js" th:src="@{/lib/jquery/jquery.min.js}"></script>
+  <script src="../static/lib/semantic-ui/semantic.min.js" th:src="@{/lib/semantic-ui/semantic.min.js}"></script>
+  <script src="../static/lib/waypoints/jquery.waypoints.min.js"
+          th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+  <script src="../static/lib/lazyload/jquery.lazyload.js" th:src="@{/lib/lazyload/jquery.lazyload.js}"></script>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body style="background: url(/img/bg-img/f4.jpg)">
+
+<!--<div id="preloader">-->
+<!--  <div class="loader"></div>-->
+<!--</div>-->
+<div th:insert="~{common/header::top}"></div>
+<header th:insert="~{common/header::header(active='article')}" style="position:fixed; top: 0; z-index: 99999"></header>
+
+
+
+
+<img th:src="@{/img/bg-img/f4.jpg}" alt="" class="ui m-bg image" id="bg_img">
+
+
+
+
+
+<!--音乐插件-->
+<!--<div th:replace="~{common/common::music}"></div>-->
+<!--热门博客-->
+<div class="ui m-padded-tb-large m-margin-top-largex">
+  <div class="ui  container  wow animate__animated animate__fadeIn" style="margin-top: 1em !important;
+    margin-bottom: 1em !important;">
+    <div align="center" class="ui secondary segment m-bg-opacity ">
+      <i class="bookmark icon"></i>热门博客
+    </div>
+  </div>
+  <div class="ui stackable m-container-mini m-opacity grid">
+    <div class="m-margin-tb-tiny four wide column recommend wow animate__animated  "
+         th:each="blog : ${recommendedBlogs}"
+         th:classappend="${((blogStat.index+1)<=2)?'animate_'+'_fadeInLeft':'animate_'+'_fadeInRight'}"
+         data-wow-duration="1.5s">
+      <div class="wrapper">
+        <div class="cols">
+          <div class="container">
+            <a class="class_outer front" href="#"
+               th:href="@{/article/}+${blog.getId()}">
+              <img alt="" class="ui rounded image"
+                   th:src="@{${blog.picture}}" style="min-height: 201.55px;">
+              <span class="class_cover">
+                                     <h4 class="m-font-size-blog-text m-margin-tb-tiny"
+                                         th:text="${blog.title}">大圣，此去欲何?</h4>
+                                    </span>
+            </a>
+            <a class="class_outer back" href="#" style="text-decoration:none;color:#333;"
+               th:href="@{/article/}+${blog.getId()}">
+              <div class="inner">
+           <span id="description" th:text="${#strings.abbreviate(blog.description,120)}"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--博客列表-->
+<div class="m-margin-bottom-small m-padded-tb-large">
+    <div class="ui container  wow animate__animated animate__fadeIn">
+        <div align="center" class="ui secondary segment m-bg-opacity">
+            <i class="bookmark icon"></i>最新博客
+        </div>
+    </div>
+    <div class="ui container m-margin-top-largex">
+        <div class="ui stackable grid">
+            <!--博客内容-->
+            <div class="ui vertical segment">
+                <!--博客列表-->
+              <div class="ui segment  m-bg-opacity  wow animate__animated animate__fadeIn"
+                   th:each="blog : ${page.getRecords()}" style="padding-top:1em !important;">
+                <a class="ui teal ribbon label md-opjjpmhoiojifppkkcdabiobhakljdgm_doc m-padded-middle m-margin-bottom-small type-label"
+                   th:href="@{/article/}+${blog.getId()}"
+                   th:text="${blog.getCategory()}"></a>
+                <div class="ui large aligned mobile reversed stackable grid m-padded-tiny">
+                  <!--博文信息-->
+                  <div class="eleven wide column ">
+                    <h3 class="ui header"><a class="m-black m-title-font" href="#"
+                                             th:href="@{/article/}+${blog.getId()}" th:text="${blog.title}">大圣，此去欲何?</a>
+                    </h3>
+                    <div class="m-margin-top-big" style="height: 36%;margin-bottom: 36px;">
+                      <p class="m-text" style="min-height: 75px"
+                         th:utext="${#strings.abbreviate(blog.getDescription(),150)}" th:href="@{/article/}+${blog.getId()}">
+                        戴上金箍，没法爱你；放下金箍，没法保护你。我知道上天不会给我第二次机会，曾经我们说好的永远，原来也仅仅只有，十二画，而已。“大圣，此去欲何?”“踏南天，碎凌霄。”“若一去不回……”“便一去不回”
+                        其实很多时候，我们都是有机会的，最后真正放弃的，是我们自己。......</p>
+                    </div>
+                    <div class="ui grid">
+                      <div class="nine wide column" style="margin-top: -10px">
+                        <div class="ui middle horizontal link list">
+                          <div class="item">
+                            <img alt="" class="ui avatar image"
+                                 src="../static/images/me.jpg"
+                                 th:src="@{/img/article/f.jpeg}" style="height: 36px;width: 36px">
+                            <div class="content"><a class="header" href="#"
+                                                    th:href="@{/about}"
+                                                    th:text="${blog.getWriter()}">oneStar</a>
+                            </div>
+                          </div>
+                          <div class="item" style="position: relative">
+                            <i class="calendar icon" style="margin-bottom: 4px"></i><span
+                            th:text="${#temporals.format(blog.getCreated(),'yyyy-MM-dd HH:mm')}">2020-01-01</span>
+                          </div>
+                          <div class="item" style="position: relative">
+                            <i class="eye icon" style="margin-bottom: 4px"></i> 浏览<span style="line-height: 30px"
+                                                                                        th:text="${blog.getWatch()}">2222</span>
+                          </div>
+                          <div class="item" style="position: relative">
+                            <i class="comment outline icon" style="margin-bottom: 4px"></i> 评论<span
+                            style="line-height: 30px"
+                            th:text="${blog.getComment()}">2222</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="right aligned seven wide column">
+                        <a class="ui  basic left pointing label m-padded-tiny"
+                           target="_blank"
+
+                          >好文</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--博文图片-->
+                  <div class="five wide column">
+                    <a href="#" th:href="@{/article/}+${blog.getId()}">
+                      <img alt="" class="ui rounded image"
+                           th:src="@{${blog.getPicture()}}">
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+
+<!--  分页-->
+              <div class="ui bottom  segment   grid m-margin-bottom m-bg-opacity wow animate__animated animate__fadeInUp">
+                <div  class="left aligned five wide column">
+                  <a class="ui  animated teal button"
+                     th:href="@{/articles/}+${pageNumber-1}"
+                     th:unless="${pageNumber==1}" tabindex="0">
+                    <div class="visible content">上一页</div>
+                    <div class="hidden content">
+                      <i class="left arrow icon"></i>
+                    </div>
+                  </a>
+                </div>
+                <div align="center" class="six wide column">
+                  <p style="line-height: 2.5em"><span th:text="${pageNumber}"></span> / <span
+                    th:text="${totalPage}"></span></p>
+                </div>
+                <div class="right aligned five wide column">
+                  <a class="ui animated teal button"
+                     th:href="@{/articles/}+${pageNumber+1}"
+                     th:unless="${pageNumber==totalPage}" tabindex="0">
+                    <div class="visible content">下一页</div>
+                    <div class="hidden content">
+                      <i class="right arrow icon"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Follow Area Start -->
+<section class="follow-area clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-heading text-center">
+          <h2>CSDN</h2>
+          <p>@FlashCanSavetheWorld</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instagram Feed Area -->
+  <div class="instragram-feed-area owl-carousel">
+    <!-- Single Instagram Item -->
+    <div class="single-instagram-item">
+      <img th:src="@{/img/show/1.jpg}" alt="">
+      <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+        <a href="#">
+          <i class="ti-instagram" aria-hidden="true"></i>
+          <span>FLASH</span>
+        </a>
+      </div>
+    </div>
+    <!-- Single Instagram Item -->
+    <div class="single-instagram-item">
+      <img th:src="@{/img/show/2.jpg}" alt="">
+      <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+        <a href="#">
+          <i class="ti-instagram" aria-hidden="true"></i>
+          <span>FLASH</span>
+        </a>
+      </div>
+    </div>
+    <!-- Single Instagram Item -->
+    <div class="single-instagram-item">
+      <img th:src="@{/img/show/3.jpg}" alt="">
+      <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+        <a href="#">
+          <i class="ti-instagram" aria-hidden="true"></i>
+          <span>FLASH</span>
+        </a>
+      </div>
+    </div>
+    <!-- Single Instagram Item -->
+    <div class="single-instagram-item">
+      <img th:src="@{/img/show/4.jpg}" alt="">
+      <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+        <a href="#">
+          <i class="ti-instagram" aria-hidden="true"></i>
+          <span>FLASH</span>
+        </a>
+      </div>
+    </div>
+    <!-- Single Instagram Item -->
+    <div class="single-instagram-item">
+      <img th:src="@{/img/show/5.jpg}" alt="">
+      <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+        <a href="#">
+          <i class="ti-instagram" aria-hidden="true"></i>
+          <span>FLASH</span>
+        </a>
+      </div>
+    </div>
+    <!-- Single Instagram Item -->
+    <div class="single-instagram-item">
+      <img th:src="@{/img/show/6.jpg}" alt="">
+      <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+        <a href="#">
+          <i class="ti-instagram" aria-hidden="true"></i>
+          <span>FLASH</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Follow Area End -->
+
+<!-- Footer Area Start -->
+<footer th:insert="~{common/footer::footer}">
+</footer>
+<!-- Footer Area End -->
+</body>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/jquery/jquery.scrollTo.min.js}"></script>
+<script>
+  new WOW().init();
+  $('#toTop').click(function () {
+    $(window).scrollTo(0, 500);
+  });
+  $('#tag-btn').popup({
+    popup: $('.tag-container'),
+    on: 'click',
+    position: 'left center'
+  });
+  $('#category-btn').popup({
+    popup: $('.category-container'),
+    on: 'click',
+    position: 'left center'
+  });
+
+  $(function() {
+    $("img.image").lazyload({
+      effect: "fadeIn",
+      placeholder:"/images/loading.gif",
+      threshold: 200, // 提前开始加载
+    });
+  });
+</script>
+<!-- All Plugins -->
+<script th:src="@{/js/alime.bundle.js}"></script>
+<!-- Active -->
+<script th:src="@{/js/default-assets/active.js}"></script>
+</html>

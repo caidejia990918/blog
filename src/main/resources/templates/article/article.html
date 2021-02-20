@@ -12,9 +12,13 @@
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
 
     <!--代码高亮-->
-    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-    <!--文章目录-->
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+
+<!--    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">-->
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/highlight/default.css}">
+    <script src="../static/lib/jquery/jquery.min.js" th:src="@{/lib/highlight/highlight.pack.js}"></script>
+
+  <!--文章目录-->
+<!--    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">-->
     <!--MarkDown风格-->
     <link rel="stylesheet" href="../static/lib/blogstyle/vue.css" th:href="@{/lib/blogstyle/vue.css}">
 
@@ -23,7 +27,6 @@
     <script src="../static/lib/semantic-ui/semantic.min.js" th:src="@{/lib/semantic-ui/semantic.min.js}"></script>
     <script src="../static/lib/waypoints/jquery.waypoints.min.js"
             th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
-    <script src="../static/js/baidu.js" th:src="@{/js/baidu.js}"></script>
     <link rel="stylesheet" th:href="@{/temp.css}">
     <style>
       pre {
@@ -31,6 +34,12 @@
         word-wrap: break-word;
         display:block;
         overflow: auto
+      }
+      .flash img{
+        max-width: 100%;
+        width:  auto; !important;
+        height: auto;
+        text-align: center;
       }
     </style>
 </head>
@@ -86,7 +95,7 @@
                     class="reply large teal icon m-font-size-text-mini"></i></a>
           <a class="ui primary basic tiny button" style="position:relative; left: 90%" th:href="@{/manage/article/edit/}+${blog.getId()}" th:if="${session.admin!=null}">编辑</a>
             <!--中间主要内容部分-->
-            <div id="write" class=" js-toc-content m-padded-lr-responsive m-padded-tb-large "
+            <div id="write" class=" js-toc-content m-padded-lr-responsive m-padded-tb-large flash"
                  th:utext="${blog.text}" >
 
                 <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
@@ -585,14 +594,15 @@ h5,h6{font-size:1em;}
 <footer th:insert="~{common/footer::footer2}">
 </footer>
 </body>
+
 <script th:src="@{/js/alime.bundle.js}"></script>
 <!-- Active -->
 <script th:src="@{/js/default-assets/active.js}"></script>
 <script src="../static/lib/wow/wow.min.js" th:src="@{/lib/wow/wow.min.js}"></script>
 <script src="../static/lib/jquery/jquery.scrollTo.min.js" th:src="@{/lib/jquery/jquery.scrollTo.min.js}"></script>
 
-<script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-<script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<!--<script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>-->
+<!--<script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>-->
 <!--阅读进度条-->
 <script src="../static/lib/progressline/headBand.min.js" th:src="@{/lib/progressline/headBand.min.js}"></script>
 <!--表情包-->
@@ -602,6 +612,7 @@ h5,h6{font-size:1em;}
 <script src="../static/lib/emoji/js/jquery-migrate-1.2.1.min.js"
         th:src="@{/lib/emoji/js/jquery-migrate-1.2.1.min.js}"></script>
 <script>
+  hljs.initHighlightingOnLoad();
     new WOW().init();
     /*阅读进度条*/
     $('.test').headBand({
@@ -615,14 +626,14 @@ h5,h6{font-size:1em;}
         position: 'bottom center'
     });
 
-    tocbot.init({
-        // Where to render the table of contents.
-        tocSelector: '.js-toc',
-        // Where to grab the headings to build the table of contents.
-        contentSelector: '.js-toc-content',
-        // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h1, h2, h3',
-    });
+    // tocbot.init({
+    //     // Where to render the table of contents.
+    //     tocSelector: '.js-toc',
+    //     // Where to grab the headings to build the table of contents.
+    //     contentSelector: '.js-toc-content',
+    //     // Which headings to grab inside of the contentSelector element.
+    //     headingSelector: 'h1, h2, h3',
+    // });
 
     $('.toc.button').popup({
         popup: $('.toc-container.popup'),
@@ -635,86 +646,8 @@ h5,h6{font-size:1em;}
         $(window).scrollTo(0, 500);
     });
 
+    // $("pre").css("background-color","rgb(38,40,37)");
 
-
-
-    $("pre").css("background-color","rgb(38,40,37)");
-    // //评论表单验证
-    // $('.ui.form').form({
-    //     fields: {
-    //         title: {
-    //             identifier: 'content',
-    //             rules: [{
-    //                 type: 'empty',
-    //                 prompt: '请输入评论内容'
-    //             }
-    //             ],
-    //         },
-    //         content: {
-    //             identifier: 'nickname',
-    //             rules: [{
-    //                 type: 'empty',
-    //                 prompt: '请输入你的大名'
-    //             }]
-    //         },
-    //         type: {
-    //             identifier: 'email',
-    //             rules: [{
-    //                 type: 'email',
-    //                 prompt: '请填写正确的邮箱地址'
-    //             }]
-    //         }
-    //     }
-    // });
-
-    // $('#commentpost-btn').click(function () {
-    //     var boo = $('.ui.form').form('validate form');
-    //     if (boo) {
-    //         console.log('校验成功');
-    //         postData();
-    //     } else {
-    //         console.log('校验失败');
-    //     }
-    // });
-    //
-    // function postData() {
-    //     $("#comment-container").load("/comments", {
-    //         "parentComment.id": $("[name='parentComment.id']").val(),
-    //         "replyCommentId": $("[name='replyCommentId']").val(),
-    //         "blogId": $("[name='blogId']").val(),
-    //         "nickname": $("[name='nickname']").val(),
-    //         "email": $("[name='email']").val(),
-    //         "content": $("[name='content']").val()
-    //     }, function (responseTxt, statusTxt, xhr) {
-    //         $(window).scrollTo($('#goto'), 500);
-    //         clearContent();
-    //         parseHtml();
-    //     });
-    // }
-    //
-    // function clearContent() {
-    //     $("[name='content']").val('').attr("placeholder", "请输入评论信息...");
-    //     $("[name='parentComment.id']").val(-1);
-    //     $("[name='replyCommentId']").val(-1);
-    // }
-    //
-    // function reply(obj) {
-    //     var replyCommentId = $(obj).data('replycommentid');
-    //     var parentCommentId = $(obj).data('parentcommentid');
-    //     var commentNickname = $(obj).data('commentnickname');
-    //     $("[name='content']").attr("placeholder", "@" + commentNickname).focus();
-    //     $("[name='parentComment.id']").val(parentCommentId);
-    //     $("[name='replyCommentId']").val(replyCommentId);
-    //     $(window).scrollTo($('#comment-form'), 500);
-    // }
-
-    //加载表情包
-    // $('.emotion').qqFace({
-    //     id: 'facebox',
-    //     assign: 'reply_comment',
-    //     path: '../lib/emoji/arclist/'	//表情存放的路径
-    // });
-    //将文字字符转换成表情图像地址
     var parseHtml = function () {
         $(".emoji_comment").each(function () {
             $(this).html(replace_em($(this).text()));

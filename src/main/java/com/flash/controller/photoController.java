@@ -28,10 +28,10 @@ public class photoController {
 
   @Autowired
   PhotoService photoService;
-  private String path = "/Users/cdj990918/Downloads/photo/";
-  private String path2 = "/Users/cdj990918/Downloads/flash/";
-//  private String path = "/root/photo/";
-//  private String path2 = "/root/flash/";
+//  private String path = "/Users/cdj990918/Downloads/photo/";
+//  private String path2 = "/Users/cdj990918/Downloads/flash/";
+  private String path = "/root/photo/";
+  private String path2 = "/root/flash/";
 
 
   @RequestMapping("/manage/photo")
@@ -69,7 +69,6 @@ public class photoController {
         out.flush();
         out.close();
 
-        //String pp = "/Users/cdj990918/Downloads/photo/";
         String [] files = new String[]{
           path+file.getOriginalFilename()
         };

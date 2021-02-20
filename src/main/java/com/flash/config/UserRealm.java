@@ -43,7 +43,7 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println("执行了认证doGetAuthenticationInfo");
 
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-      Admin admin = adminService.getOne(new QueryWrapper<Admin>().eq("name",userToken.getUsername()));
+        Admin admin = adminService.getOne(new QueryWrapper<Admin>().eq("name",userToken.getUsername()));
 
         if(admin==null)
             return null;//自动抛出UnknownAccountException异常

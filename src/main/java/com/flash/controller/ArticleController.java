@@ -39,8 +39,8 @@ import static java.lang.Math.min;
 public class ArticleController {
 
 
-  private String path = "/Users/cdj990918/Downloads/blogimg/";
-//  private String path = "/root/blogimg/";
+//  private String path = "/Users/cdj990918/Downloads/blogimg/";
+  private String path = "/root/blogimg/";
   @Autowired
   BlogService blogService;
 
@@ -57,7 +57,7 @@ public class ArticleController {
     }
     model.addAttribute("recommendedBlogs",rblogs);
     Page blogIPage = new Page(currentPage,5);
-    IPage<Blog> page = blogService.page(blogIPage, new QueryWrapper<Blog>());
+    IPage<Blog> page = blogService.page(blogIPage, new QueryWrapper<Blog>().orderByDesc("created"));
 //    for(Blog b :page.getRecords()){
 //      System.out.println(b);
 //    }
@@ -118,6 +118,11 @@ public class ArticleController {
     return "article/edit";
   }
 
+  @RequestMapping("/manage/article/delete/{id}")
+  public String deleteArticle(@PathVariable("id") Long id){
+    blogService.remove(new QueryWrapper<Blog>().eq("id",id));
+    return "redirect:/manage/article/edit";
+  }
   @RequestMapping("/manage/article/edit/{id}")
   public String getarticleEdit(Model model ,@PathVariable("id") Long id){
     Blog blog = blogService.getOne(new QueryWrapper<Blog>().eq("id", id));
